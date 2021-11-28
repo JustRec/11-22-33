@@ -54,6 +54,7 @@ namespace HelloWorld
             bool is_placement_done = false;
             int placed_number_counter = 0;
 
+            //Number placement loop.
             while(is_placement_done == false){
                 random_array = rnd.Next(1,4);
                 random_index = rnd.Next(1, 31);
@@ -83,6 +84,7 @@ namespace HelloWorld
                 }
             }
 
+            //Outputs frame of game screen.
             Console.Clear();
             Console.Write("+");
             for(int i = 0; i < 30; i++){
@@ -98,8 +100,10 @@ namespace HelloWorld
             }
             Console.WriteLine("+");
 
+            //Main game loop
             while(true){
                 
+                //Resets cursor position and outputs arrays.
                 Console.SetCursorPosition(0,1);
                 for(int i = 0; i < 32; i++){
                     Console.Write(a1[i]);
@@ -117,13 +121,14 @@ namespace HelloWorld
                 Console.WriteLine();
 
                 
-
+                //Sets cursor position to it's original coordinates
                 Console.SetCursorPosition(cursor_x, cursor_y);
 
                 if(Console.KeyAvailable){  //readkey
                 
                     cursor_key = Console.ReadKey(true);
 
+                    //Cursor movement with arrow keys.
                     if(cursor_key.Key == ConsoleKey.RightArrow && cursor_x < 30){
                         Console.SetCursorPosition(cursor_x, cursor_y);
                         cursor_x += 1;
@@ -141,6 +146,7 @@ namespace HelloWorld
                         cursor_y += 1;
                     }
 
+                    //Number movement with WASD keys
                     if(cursor_key.Key == ConsoleKey.W){
                         if(cursor_y != 1){
                             if(cursor_y == 2 && a1[cursor_x] == ' '){
@@ -176,13 +182,13 @@ namespace HelloWorld
                         
                     }
 
+                    //Ends the loop if the escape key is pressed.
                     if (cursor_key.Key == ConsoleKey.Escape) break;
-
-                    Console.SetCursorPosition(cursor_x, cursor_y);
 
 
                 }
-                Thread.Sleep(20); //update array
+                //Waits for 20ms to prevent glitches in game screen.
+                Thread.Sleep(20);
             }
         
         }
