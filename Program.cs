@@ -23,10 +23,26 @@ namespace HelloWorld
                 return 'X';
             }
         }
+
+        static bool IsAdjacent(char[] array, int cursor_x){
+            if(array[cursor_x + 1] == ' ' && array[cursor_x - 1] == ' '){
+                return false;
+            }
+            else{
+                return true;
+            }
+
+        }
+
+
+        
         static void Main(string[] args)
         {
+               
+
             int cursor_x = 1;
             int cursor_y = 1;
+            int score = 0;
 
             ConsoleKeyInfo cursor_key; 
 
@@ -52,37 +68,40 @@ namespace HelloWorld
             int random_number = rnd.Next(1,4);
 
             bool is_placement_done = false;
-            int placed_number_counter = 0;
 
             //Number placement loop.
-            while(is_placement_done == false){
-                random_array = rnd.Next(1,4);
-                random_index = rnd.Next(1, 31);
-                random_number = rnd.Next(1,4);
+            void NumberPlacement(int new_counter){
+                while(is_placement_done == false){
+                    random_array = rnd.Next(1,4);
+                    random_index = rnd.Next(1, 31);
+                    random_number = rnd.Next(1,4);
 
-                if(random_array == 1){
-                    if(a1[random_index] == ' '){
-                        a1[random_index] = IntToChar(random_number);
-                        placed_number_counter += 1;
+                    if(random_array == 1){
+                        if(a1[random_index] == ' '){
+                            a1[random_index] = IntToChar(random_number);
+                            new_counter += 1;
+                        }
                     }
-                }
-                else if(random_array == 2){
-                    if(a2[random_index] == ' '){
-                        a2[random_index] = IntToChar(random_number);
-                        placed_number_counter += 1;
+                    else if(random_array == 2){
+                        if(a2[random_index] == ' '){
+                            a2[random_index] = IntToChar(random_number);
+                            new_counter += 1;
+                        }
                     }
-                }
-                else if(random_array == 3){
-                    if(a3[random_index] == ' '){
-                        a3[random_index] = IntToChar(random_number);
-                        placed_number_counter += 1;
+                    else if(random_array == 3){
+                        if(a3[random_index] == ' '){
+                            a3[random_index] = IntToChar(random_number);
+                            new_counter += 1;
+                        }
                     }
-                }
 
-                if(placed_number_counter == 30){
-                    is_placement_done = true;
+                    if(new_counter == 30){
+                        is_placement_done = true;
+                    }
                 }
             }
+            NumberPlacement(0);
+            is_placement_done = false;
 
             //Outputs frame of game screen.
             Console.Clear();
@@ -150,41 +169,149 @@ namespace HelloWorld
                     if(cursor_key.Key == ConsoleKey.W){
                         if(cursor_y != 1){
                             if(cursor_y == 2 && a1[cursor_x] == ' '){
-                                a1[cursor_x] = a2[cursor_x];
-                                a2[cursor_x] = ' ';
-                                cursor_y -= 1;
-                                Console.SetCursorPosition(cursor_x, cursor_y);
+                                if(a2[cursor_x + 1] == ' ' && a2[cursor_x - 1] == ' '){
+                                    a1[cursor_x] = a2[cursor_x];
+                                    a2[cursor_x] = ' ';
+                                    cursor_y -= 1;
+                                    Console.SetCursorPosition(cursor_x, cursor_y);
+                                }
+                                
                             }
                             else if(a2[cursor_x] == ' '){
-                                a2[cursor_x] = a3[cursor_x];
-                                a3[cursor_x] = ' ';
-                                cursor_y -= 1;
-                                Console.SetCursorPosition(cursor_x, cursor_y);
+                                if(a3[cursor_x + 1] == ' ' && a3[cursor_x - 1] == ' '){
+                                    a2[cursor_x] = a3[cursor_x];
+                                    a3[cursor_x] = ' ';
+                                    cursor_y -= 1;
+                                    Console.SetCursorPosition(cursor_x, cursor_y);
+                                }
                             }
                         }
                     }
+                    
                     if(cursor_key.Key == ConsoleKey.S){
                         if(cursor_y != 3){
                             if(cursor_y == 2 && a3[cursor_x] == ' '){
-                                a3[cursor_x] = a2[cursor_x];
-                                a2[cursor_x] = ' ';
-                                cursor_y += 1;
-                                Console.SetCursorPosition(cursor_x, cursor_y);
+                                if(a2[cursor_x + 1] == ' ' && a2[cursor_x - 1] == ' '){
+                                    a3[cursor_x] = a2[cursor_x];
+                                    a2[cursor_x] = ' ';
+                                    cursor_y += 1;
+                                    Console.SetCursorPosition(cursor_x, cursor_y);
+                                }
+                                
                             }
                             else if(a2[cursor_x] == ' '){
-                                a2[cursor_x] = a1[cursor_x];
-                                a1[cursor_x] = ' ';
-                                cursor_y += 1;
-                                Console.SetCursorPosition(cursor_x, cursor_y);
+                                if(a1[cursor_x + 1] == ' ' && a1[cursor_x - 1] == ' '){
+                                    a2[cursor_x] = a1[cursor_x];
+                                    a1[cursor_x] = ' ';
+                                    cursor_y += 1;
+                                    Console.SetCursorPosition(cursor_x, cursor_y);
+                                }
                             }
                         }
                     }
 
+                    if(cursor_key.Key == ConsoleKey.D){
+                        if(cursor_y == 1 && IsAdjacent(a1, cursor_x) == false){
+                            while(IsAdjacent(a1, cursor_x) == false){
+                                a1[cursor_x + 1] = a1[cursor_x];
+                                a1[cursor_x] = ' ';
+                                cursor_x += 1;
+                                Console.SetCursorPosition(cursor_x, cursor_y);
+                            }
+                        }
+                        if(cursor_y == 2 && IsAdjacent(a2, cursor_x) == false){
+                            while(IsAdjacent(a2, cursor_x) == false){
+                                a2[cursor_x + 1] = a2[cursor_x];
+                                a2[cursor_x] = ' ';
+                                cursor_x += 1;
+                                Console.SetCursorPosition(cursor_x, cursor_y);
+                            }
+                        }
+                        if(cursor_y == 3 && IsAdjacent(a3, cursor_x) == false){
+                            while(IsAdjacent(a3, cursor_x) == false){
+                                a3[cursor_x + 1] = a3[cursor_x];
+                                a3[cursor_x] = ' ';
+                                cursor_x += 1;
+                                Console.SetCursorPosition(cursor_x, cursor_y);
+                            }
+                        }                     
+                    }
+
+                    if(cursor_key.Key == ConsoleKey.A){
+                        if(cursor_y == 1 && IsAdjacent(a1, cursor_x) == false){
+                            while(IsAdjacent(a1, cursor_x) == false){
+                                a1[cursor_x - 1] = a1[cursor_x];
+                                a1[cursor_x] = ' ';
+                                cursor_x -= 1;
+                                Console.SetCursorPosition(cursor_x, cursor_y);
+                            }
+                        }
+                        if(cursor_y == 2 && IsAdjacent(a2, cursor_x) == false){
+                            while(IsAdjacent(a2, cursor_x) == false){
+                                a2[cursor_x - 1] = a2[cursor_x];
+                                a2[cursor_x] = ' ';
+                                cursor_x -= 1;
+                                Console.SetCursorPosition(cursor_x, cursor_y);
+                            }
+                        }
+                        if(cursor_y == 3 && IsAdjacent(a3, cursor_x) == false){
+                            while(IsAdjacent(a3, cursor_x) == false){
+                                a3[cursor_x - 1] = a3[cursor_x];
+                                a3[cursor_x] = ' ';
+                                cursor_x -= 1;
+                                Console.SetCursorPosition(cursor_x, cursor_y);
+                            }
+                        }                     
+                    }
+
+                    
+
                     //Ends the loop if the escape key is pressed.
                     if (cursor_key.Key == ConsoleKey.Escape) break;
-
-
                 }
+                if(cursor_y == 1 && a1[cursor_x] != ' '){
+                    if(a1[cursor_x] == a1[cursor_x + 1]){
+                        a1[cursor_x] = a1[cursor_x + 1] = ' ';
+                        score += 10;
+                        NumberPlacement(29);
+                        is_placement_done = false;
+                    }
+                    if(a1[cursor_x] == a1[cursor_x - 1]){
+                        a1[cursor_x] = a1[cursor_x - 1] = ' ';
+                        score += 10;
+                        NumberPlacement(29);
+                        is_placement_done = false;
+                    }
+                }
+                if(cursor_y == 2 && a2[cursor_x] != ' '){
+                    if(a2[cursor_x] == a2[cursor_x + 1]){
+                        a2[cursor_x] = a2[cursor_x + 1] = ' ';
+                        score += 10;
+                        NumberPlacement(29);
+                        is_placement_done = false;
+                    }
+                    if(a2[cursor_x] == a2[cursor_x - 1]){
+                        a2[cursor_x] = a2[cursor_x - 1] = ' ';
+                        score += 10;
+                        NumberPlacement(29);
+                        is_placement_done = false;
+                    }
+                }
+                if(cursor_y == 3 && a3[cursor_x] != ' '){
+                    if(a3[cursor_x] == a3[cursor_x + 1]){
+                        a3[cursor_x] = a3[cursor_x + 1] = ' ';
+                        score += 10;
+                        NumberPlacement(29);
+                        is_placement_done = false;
+                    }
+                    if(a3[cursor_x] == a3[cursor_x - 1]){
+                        a3[cursor_x] = a3[cursor_x - 1] = ' ';
+                        score += 10;
+                        NumberPlacement(29);
+                        is_placement_done = false;
+                    }
+                }
+
                 //Waits for 20ms to prevent glitches in game screen.
                 Thread.Sleep(20);
             }
@@ -196,4 +323,8 @@ namespace HelloWorld
 //Known Bugs
 //   * Numbers disappear while moving them from layer 3 to layer 2  //Fixed with adding an coniditon to else
 //   * ""          ""      ""    ""     ""  ""  layer 1 to layer 2  //                  ""
+
+
+//Ideas
+//if statement a2[cursor_X +-1] = '1','2','3' for adjacent rule
 
