@@ -155,14 +155,13 @@ namespace HelloWorld
                                 cursor_y -= 1;
                                 Console.SetCursorPosition(cursor_x, cursor_y);
                             }
-                            else{
+                            else if(a2[cursor_x] == ' '){
                                 a2[cursor_x] = a3[cursor_x];
                                 a3[cursor_x] = ' ';
                                 cursor_y -= 1;
                                 Console.SetCursorPosition(cursor_x, cursor_y);
                             }
                         }
-                        
                     }
                     if(cursor_key.Key == ConsoleKey.S){
                         if(cursor_y != 3){
@@ -172,14 +171,13 @@ namespace HelloWorld
                                 cursor_y += 1;
                                 Console.SetCursorPosition(cursor_x, cursor_y);
                             }
-                            else{
+                            else if(a2[cursor_x] == ' '){
                                 a2[cursor_x] = a1[cursor_x];
                                 a1[cursor_x] = ' ';
                                 cursor_y += 1;
                                 Console.SetCursorPosition(cursor_x, cursor_y);
                             }
                         }
-                        
                     }
 
                     //Ends the loop if the escape key is pressed.
@@ -196,5 +194,6 @@ namespace HelloWorld
 }
 
 //Known Bugs
-//   * Numbers disappear while moving them from layer 3 to layer 2
+//   * Numbers disappear while moving them from layer 3 to layer 2  //Fixed with adding an coniditon to else
+//   * ""          ""      ""    ""     ""  ""  layer 1 to layer 2  //                  ""
 
