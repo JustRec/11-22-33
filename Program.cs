@@ -164,7 +164,7 @@ namespace HelloWorld
                     }
                 }
             }
-            NumberPlacement(0);
+            NumberPlacement(-2);
             MatchingNumbers();
             is_placement_done = false;
 
