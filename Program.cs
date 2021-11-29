@@ -68,6 +68,70 @@ namespace HelloWorld
             int random_number = rnd.Next(1,4);
 
             bool is_placement_done = false;
+            bool are_there_any_pairs = true;
+
+            void MatchingNumbers(){
+                while(are_there_any_pairs == true){
+                    int  break_counter = 0;
+
+                    for (int i = 1; i < 31; i++){
+                        if(a1[i] == a1[i + 1] && a1[i] != ' '){
+                            a1[i] = a1[i + 1] = ' ';
+                            score += 10;
+                            NumberPlacement(28);
+                            is_placement_done = false;
+                            break_counter += 1;
+                        }
+
+                        if(a1[i] == a1[i - 1] && a1[i] != ' '){
+                            a1[i] = a1[i - 1] = ' ';
+                            score += 10;
+                            NumberPlacement(28);
+                            is_placement_done = false;
+                            break_counter += 1;
+                        }
+
+                        if(a2[i] == a2[i + 1] && a2[i] != ' '){
+                            a2[i] = a2[i + 1] = ' ';
+                            score += 10;
+                            NumberPlacement(28);
+                            is_placement_done = false;
+                            break_counter += 1;
+                        }
+
+                        if(a2[i] == a2[i - 1] && a2[i] != ' '){
+                            a2[i] = a2[i - 1] = ' ';
+                            score += 10;
+                            NumberPlacement(28);
+                            is_placement_done = false;
+                            break_counter += 1;
+                        }
+
+                        if(a3[i] == a3[i + 1] && a3[i] != ' '){
+                            a3[i] = a3[i + 1] = ' ';
+                            score += 10;
+                            NumberPlacement(28);
+                            is_placement_done = false;
+                            break_counter += 1;
+                        }
+
+                        if(a3[i] == a3[i - 1] && a3[i] != ' '){
+                            a3[i] = a3[i - 1] = ' ';
+                            score += 10;
+                            NumberPlacement(28);
+                            is_placement_done = false;
+                            break_counter += 1;
+                        }
+
+                        if(break_counter == 0){
+                            are_there_any_pairs = false;
+                        }
+
+
+
+                    }
+                }
+            }
 
             //Number placement loop.
             void NumberPlacement(int new_counter){
@@ -101,6 +165,7 @@ namespace HelloWorld
                 }
             }
             NumberPlacement(0);
+            MatchingNumbers();
             is_placement_done = false;
 
             //Outputs frame of game screen.
@@ -138,12 +203,15 @@ namespace HelloWorld
                     Console.Write(a3[i]);
                 }
                 Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.Write("Score: {0}", score);
 
                 
                 //Sets cursor position to it's original coordinates
                 Console.SetCursorPosition(cursor_x, cursor_y);
 
-                if(Console.KeyAvailable){  //readkey
+                if(Console.KeyAvailable){
                 
                     cursor_key = Console.ReadKey(true);
 
@@ -173,6 +241,7 @@ namespace HelloWorld
                                     a1[cursor_x] = a2[cursor_x];
                                     a2[cursor_x] = ' ';
                                     cursor_y -= 1;
+                                    are_there_any_pairs = true;
                                     Console.SetCursorPosition(cursor_x, cursor_y);
                                 }
                                 
@@ -182,6 +251,7 @@ namespace HelloWorld
                                     a2[cursor_x] = a3[cursor_x];
                                     a3[cursor_x] = ' ';
                                     cursor_y -= 1;
+                                    are_there_any_pairs = true;
                                     Console.SetCursorPosition(cursor_x, cursor_y);
                                 }
                             }
@@ -195,6 +265,7 @@ namespace HelloWorld
                                     a3[cursor_x] = a2[cursor_x];
                                     a2[cursor_x] = ' ';
                                     cursor_y += 1;
+                                    are_there_any_pairs = true;
                                     Console.SetCursorPosition(cursor_x, cursor_y);
                                 }
                                 
@@ -204,6 +275,7 @@ namespace HelloWorld
                                     a2[cursor_x] = a1[cursor_x];
                                     a1[cursor_x] = ' ';
                                     cursor_y += 1;
+                                    are_there_any_pairs = true;
                                     Console.SetCursorPosition(cursor_x, cursor_y);
                                 }
                             }
@@ -234,7 +306,8 @@ namespace HelloWorld
                                 cursor_x += 1;
                                 Console.SetCursorPosition(cursor_x, cursor_y);
                             }
-                        }                     
+                        }
+                        are_there_any_pairs = true;                  
                     }
 
                     if(cursor_key.Key == ConsoleKey.A){
@@ -261,7 +334,8 @@ namespace HelloWorld
                                 cursor_x -= 1;
                                 Console.SetCursorPosition(cursor_x, cursor_y);
                             }
-                        }                     
+                        }
+                        are_there_any_pairs = true;                     
                     }
 
                     
@@ -269,48 +343,10 @@ namespace HelloWorld
                     //Ends the loop if the escape key is pressed.
                     if (cursor_key.Key == ConsoleKey.Escape) break;
                 }
-                if(cursor_y == 1 && a1[cursor_x] != ' '){
-                    if(a1[cursor_x] == a1[cursor_x + 1]){
-                        a1[cursor_x] = a1[cursor_x + 1] = ' ';
-                        score += 10;
-                        NumberPlacement(29);
-                        is_placement_done = false;
-                    }
-                    if(a1[cursor_x] == a1[cursor_x - 1]){
-                        a1[cursor_x] = a1[cursor_x - 1] = ' ';
-                        score += 10;
-                        NumberPlacement(29);
-                        is_placement_done = false;
-                    }
-                }
-                if(cursor_y == 2 && a2[cursor_x] != ' '){
-                    if(a2[cursor_x] == a2[cursor_x + 1]){
-                        a2[cursor_x] = a2[cursor_x + 1] = ' ';
-                        score += 10;
-                        NumberPlacement(29);
-                        is_placement_done = false;
-                    }
-                    if(a2[cursor_x] == a2[cursor_x - 1]){
-                        a2[cursor_x] = a2[cursor_x - 1] = ' ';
-                        score += 10;
-                        NumberPlacement(29);
-                        is_placement_done = false;
-                    }
-                }
-                if(cursor_y == 3 && a3[cursor_x] != ' '){
-                    if(a3[cursor_x] == a3[cursor_x + 1]){
-                        a3[cursor_x] = a3[cursor_x + 1] = ' ';
-                        score += 10;
-                        NumberPlacement(29);
-                        is_placement_done = false;
-                    }
-                    if(a3[cursor_x] == a3[cursor_x - 1]){
-                        a3[cursor_x] = a3[cursor_x - 1] = ' ';
-                        score += 10;
-                        NumberPlacement(29);
-                        is_placement_done = false;
-                    }
-                }
+
+                MatchingNumbers();
+                
+                
 
                 //Waits for 20ms to prevent glitches in game screen.
                 Thread.Sleep(20);
@@ -319,12 +355,3 @@ namespace HelloWorld
         }
     }
 }
-
-//Known Bugs
-//   * Numbers disappear while moving them from layer 3 to layer 2  //Fixed with adding an coniditon to else
-//   * ""          ""      ""    ""     ""  ""  layer 1 to layer 2  //                  ""
-
-
-//Ideas
-//if statement a2[cursor_X +-1] = '1','2','3' for adjacent rule
-
