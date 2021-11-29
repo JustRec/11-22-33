@@ -74,17 +74,9 @@ namespace HelloWorld
                 while(are_there_any_pairs == true){
                     int  break_counter = 0;
 
-                    for (int i = 1; i < 31; i++){
+                    for (int i = 0; i < 31; i++){
                         if(a1[i] == a1[i + 1] && a1[i] != ' '){
                             a1[i] = a1[i + 1] = ' ';
-                            score += 10;
-                            NumberPlacement(28);
-                            is_placement_done = false;
-                            break_counter += 1;
-                        }
-
-                        if(a1[i] == a1[i - 1] && a1[i] != ' '){
-                            a1[i] = a1[i - 1] = ' ';
                             score += 10;
                             NumberPlacement(28);
                             is_placement_done = false;
@@ -99,14 +91,6 @@ namespace HelloWorld
                             break_counter += 1;
                         }
 
-                        if(a2[i] == a2[i - 1] && a2[i] != ' '){
-                            a2[i] = a2[i - 1] = ' ';
-                            score += 10;
-                            NumberPlacement(28);
-                            is_placement_done = false;
-                            break_counter += 1;
-                        }
-
                         if(a3[i] == a3[i + 1] && a3[i] != ' '){
                             a3[i] = a3[i + 1] = ' ';
                             score += 10;
@@ -115,20 +99,10 @@ namespace HelloWorld
                             break_counter += 1;
                         }
 
-                        if(a3[i] == a3[i - 1] && a3[i] != ' '){
-                            a3[i] = a3[i - 1] = ' ';
-                            score += 10;
-                            NumberPlacement(28);
-                            is_placement_done = false;
-                            break_counter += 1;
-                        }
-
-                        if(break_counter == 0){
-                            are_there_any_pairs = false;
-                        }
-
-
-
+                    }
+                    
+                    if(break_counter == 0){
+                        are_there_any_pairs = false;
                     }
                 }
             }
