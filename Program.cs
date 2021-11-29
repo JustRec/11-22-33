@@ -67,9 +67,11 @@ namespace HelloWorld
             int random_index = rnd.Next(1, 31);
             int random_number = rnd.Next(1,4);
 
+
             bool is_placement_done = false;
             bool are_there_any_pairs = true;
 
+            //Check for matching numbers then place them with a new pair.
             void MatchingNumbers(){
                 while(are_there_any_pairs == true){
                     int  break_counter = 0;
@@ -142,7 +144,7 @@ namespace HelloWorld
             MatchingNumbers();
             is_placement_done = false;
 
-            //Outputs frame of game screen.
+            //Output frame of game screen.
             Console.Clear();
             Console.Write("+");
             for(int i = 0; i < 30; i++){
@@ -161,20 +163,46 @@ namespace HelloWorld
             //Main game loop
             while(true){
                 
-                //Resets cursor position and outputs arrays.
+                //Reset cursor position and output arrays.
                 Console.SetCursorPosition(0,1);
                 for(int i = 0; i < 32; i++){
-                    Console.Write(a1[i]);
+                    if(cursor_y == 1 && i == cursor_x){
+                        Console.BackgroundColor = ConsoleColor.DarkBlue;
+                        Console.Write(a1[i]);
+                        Console.ResetColor();
+                        Console.CursorVisible = false;
+                    }
+                    else{
+                        Console.Write(a1[i]);
+                    }
+                    
+                    
                 }
                 Console.WriteLine();
 
                 for(int i = 0; i < 32; i++){
-                    Console.Write(a2[i]);
+                    if(cursor_y == 2 && i == cursor_x){
+                        Console.BackgroundColor = ConsoleColor.DarkBlue;
+                        Console.Write(a2[i]);
+                        Console.ResetColor();
+                        Console.CursorVisible = false;
+                    }
+                    else{
+                        Console.Write(a2[i]);
+                    }
                 }
                 Console.WriteLine();
 
                 for(int i = 0; i < 32; i++){
-                    Console.Write(a3[i]);
+                    if(cursor_y == 3 && i == cursor_x){
+                        Console.BackgroundColor = ConsoleColor.DarkBlue;
+                        Console.Write(a3[i]);
+                        Console.ResetColor();
+                        Console.CursorVisible = false;
+                    }
+                    else{
+                        Console.Write(a3[i]);
+                    }
                 }
                 Console.WriteLine();
                 Console.WriteLine();
@@ -182,7 +210,7 @@ namespace HelloWorld
                 Console.Write("Score: {0}", score);
 
                 
-                //Sets cursor position to it's original coordinates
+                //Set cursor position to it's original coordinates
                 Console.SetCursorPosition(cursor_x, cursor_y);
 
                 if(Console.KeyAvailable){
@@ -314,15 +342,16 @@ namespace HelloWorld
 
                     
 
-                    //Ends the loop if the escape key is pressed.
+                    //End the loop if the escape key is pressed.
                     if (cursor_key.Key == ConsoleKey.Escape) break;
                 }
 
+                //Check for matching numbers each iteration
                 MatchingNumbers();
                 
                 
 
-                //Waits for 20ms to prevent glitches in game screen.
+                //Wait for 20ms to prevent glitches in game screen.
                 Thread.Sleep(20);
             }
         
