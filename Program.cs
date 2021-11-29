@@ -25,7 +25,7 @@ namespace HelloWorld
         }
 
         static bool IsAdjacent(char[] array, int cursor_x){
-            if(array[cursor_x + 1] == ' ' && array[cursor_x - 1] == ' '){
+            if((array[cursor_x + 1] == ' ' || array[cursor_x + 1] == '|' ) && (array[cursor_x - 1] == ' ' || array[cursor_x - 1] == '|' )){
                 return false;
             }
             else{
@@ -211,7 +211,7 @@ namespace HelloWorld
                     if(cursor_key.Key == ConsoleKey.W){
                         if(cursor_y != 1){
                             if(cursor_y == 2 && a1[cursor_x] == ' '){
-                                if(a2[cursor_x + 1] == ' ' && a2[cursor_x - 1] == ' '){
+                                if((a2[cursor_x + 1] == ' ' || a2[cursor_x + 1] == '|' ) && (a2[cursor_x - 1] == ' ' || a2[cursor_x - 1] == '|' )){
                                     a1[cursor_x] = a2[cursor_x];
                                     a2[cursor_x] = ' ';
                                     cursor_y -= 1;
@@ -221,7 +221,7 @@ namespace HelloWorld
                                 
                             }
                             else if(a2[cursor_x] == ' '){
-                                if(a3[cursor_x + 1] == ' ' && a3[cursor_x - 1] == ' '){
+                                if((a3[cursor_x + 1] == ' ' || a3[cursor_x + 1] == '|' ) && (a3[cursor_x - 1] == ' ' || a3[cursor_x - 1] == '|' )){
                                     a2[cursor_x] = a3[cursor_x];
                                     a3[cursor_x] = ' ';
                                     cursor_y -= 1;
@@ -235,7 +235,7 @@ namespace HelloWorld
                     if(cursor_key.Key == ConsoleKey.S){
                         if(cursor_y != 3){
                             if(cursor_y == 2 && a3[cursor_x] == ' '){
-                                if(a2[cursor_x + 1] == ' ' && a2[cursor_x - 1] == ' '){
+                                if((a2[cursor_x + 1] == ' ' || a2[cursor_x + 1] == '|' ) && (a2[cursor_x - 1] == ' ' || a2[cursor_x - 1] == '|' )){
                                     a3[cursor_x] = a2[cursor_x];
                                     a2[cursor_x] = ' ';
                                     cursor_y += 1;
@@ -245,7 +245,7 @@ namespace HelloWorld
                                 
                             }
                             else if(a2[cursor_x] == ' '){
-                                if(a1[cursor_x + 1] == ' ' && a1[cursor_x - 1] == ' '){
+                                if((a1[cursor_x + 1] == ' ' || a1[cursor_x + 1] == '|' ) && (a1[cursor_x - 1] == ' ' || a1[cursor_x - 1] == '|' )){
                                     a2[cursor_x] = a1[cursor_x];
                                     a1[cursor_x] = ' ';
                                     cursor_y += 1;
