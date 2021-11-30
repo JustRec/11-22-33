@@ -285,59 +285,63 @@ namespace HelloWorld
                     }
 
                     if(cursor_key.Key == ConsoleKey.D){
-                        if(cursor_y == 1 && IsAdjacent(a1, cursor_x) == false){
-                            while(IsAdjacent(a1, cursor_x) == false){
-                                a1[cursor_x + 1] = a1[cursor_x];
-                                a1[cursor_x] = ' ';
-                                cursor_x += 1;
-                                Console.SetCursorPosition(cursor_x, cursor_y);
+                        if(a1[cursor_x + 1] != '|'){
+                            if(cursor_y == 1 && IsAdjacent(a1, cursor_x) == false){
+                                while(IsAdjacent(a1, cursor_x) == false){
+                                    a1[cursor_x + 1] = a1[cursor_x];
+                                    a1[cursor_x] = ' ';
+                                    cursor_x += 1;
+                                    Console.SetCursorPosition(cursor_x, cursor_y);
+                                }
                             }
-                        }
-                        if(cursor_y == 2 && IsAdjacent(a2, cursor_x) == false){
-                            while(IsAdjacent(a2, cursor_x) == false){
-                                a2[cursor_x + 1] = a2[cursor_x];
-                                a2[cursor_x] = ' ';
-                                cursor_x += 1;
-                                Console.SetCursorPosition(cursor_x, cursor_y);
+                            if(cursor_y == 2 && IsAdjacent(a2, cursor_x) == false){
+                                while(IsAdjacent(a2, cursor_x) == false){
+                                    a2[cursor_x + 1] = a2[cursor_x];
+                                    a2[cursor_x] = ' ';
+                                    cursor_x += 1;
+                                    Console.SetCursorPosition(cursor_x, cursor_y);
+                                }
                             }
-                        }
-                        if(cursor_y == 3 && IsAdjacent(a3, cursor_x) == false){
-                            while(IsAdjacent(a3, cursor_x) == false){
-                                a3[cursor_x + 1] = a3[cursor_x];
-                                a3[cursor_x] = ' ';
-                                cursor_x += 1;
-                                Console.SetCursorPosition(cursor_x, cursor_y);
+                            if(cursor_y == 3 && IsAdjacent(a3, cursor_x) == false){
+                                while(IsAdjacent(a3, cursor_x) == false){
+                                    a3[cursor_x + 1] = a3[cursor_x];
+                                    a3[cursor_x] = ' ';
+                                    cursor_x += 1;
+                                    Console.SetCursorPosition(cursor_x, cursor_y);
+                                }
                             }
+                            are_there_any_pairs = true; 
                         }
-                        are_there_any_pairs = true;                  
                     }
 
                     if(cursor_key.Key == ConsoleKey.A){
-                        if(cursor_y == 1 && IsAdjacent(a1, cursor_x) == false){
-                            while(IsAdjacent(a1, cursor_x) == false){
-                                a1[cursor_x - 1] = a1[cursor_x];
-                                a1[cursor_x] = ' ';
-                                cursor_x -= 1;
-                                Console.SetCursorPosition(cursor_x, cursor_y);
+                        if(a1[cursor_x - 1] != '|'){
+                            if(cursor_y == 1 && IsAdjacent(a1, cursor_x) == false){
+                                while(IsAdjacent(a1, cursor_x) == false){
+                                    a1[cursor_x - 1] = a1[cursor_x];
+                                    a1[cursor_x] = ' ';
+                                    cursor_x -= 1;
+                                    Console.SetCursorPosition(cursor_x, cursor_y);
+                                }
                             }
-                        }
-                        if(cursor_y == 2 && IsAdjacent(a2, cursor_x) == false){
-                            while(IsAdjacent(a2, cursor_x) == false){
-                                a2[cursor_x - 1] = a2[cursor_x];
-                                a2[cursor_x] = ' ';
-                                cursor_x -= 1;
-                                Console.SetCursorPosition(cursor_x, cursor_y);
+                            if(cursor_y == 2 && IsAdjacent(a2, cursor_x) == false){
+                                while(IsAdjacent(a2, cursor_x) == false){
+                                    a2[cursor_x - 1] = a2[cursor_x];
+                                    a2[cursor_x] = ' ';
+                                    cursor_x -= 1;
+                                    Console.SetCursorPosition(cursor_x, cursor_y);
+                                }
                             }
-                        }
-                        if(cursor_y == 3 && IsAdjacent(a3, cursor_x) == false){
-                            while(IsAdjacent(a3, cursor_x) == false){
-                                a3[cursor_x - 1] = a3[cursor_x];
-                                a3[cursor_x] = ' ';
-                                cursor_x -= 1;
-                                Console.SetCursorPosition(cursor_x, cursor_y);
+                            if(cursor_y == 3 && IsAdjacent(a3, cursor_x) == false){
+                                while(IsAdjacent(a3, cursor_x) == false){
+                                    a3[cursor_x - 1] = a3[cursor_x];
+                                    a3[cursor_x] = ' ';
+                                    cursor_x -= 1;
+                                    Console.SetCursorPosition(cursor_x, cursor_y);
+                                }
                             }
-                        }
-                        are_there_any_pairs = true;                     
+                            are_there_any_pairs = true;  
+                        }                   
                     }
 
                     
