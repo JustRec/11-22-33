@@ -37,12 +37,17 @@ namespace HelloWorld
 
         
         static void Main(string[] args)
-        {
-               
+        {   
+            Console.CursorVisible = false;
 
             int cursor_x = 1;
             int cursor_y = 1;
             int score = 0;
+
+            int placed_number_1x = 0;
+            int placed_number_1y = 0;
+            int placed_number_2x = 0;
+            int placed_number_2y = 0;
 
             ConsoleKeyInfo cursor_key; 
 
@@ -111,6 +116,10 @@ namespace HelloWorld
 
             //Number placement loop.
             void NumberPlacement(int new_counter){
+
+                placed_number_1x = 0;
+                placed_number_2x = 0;
+                
                 while(is_placement_done == false){
                     random_array = rnd.Next(1,4);
                     random_index = rnd.Next(1, 31);
@@ -120,18 +129,42 @@ namespace HelloWorld
                         if(a1[random_index] == ' '){
                             a1[random_index] = IntToChar(random_number);
                             new_counter += 1;
+                            if(placed_number_1x == 0){
+                                placed_number_1x = random_index;
+                                placed_number_1y = 1;
+                            }
+                            else if(placed_number_2x == 0){
+                                placed_number_2x = random_index;
+                                placed_number_2y = 1;
+                            }
                         }
                     }
                     else if(random_array == 2){
                         if(a2[random_index] == ' '){
                             a2[random_index] = IntToChar(random_number);
                             new_counter += 1;
+                            if(placed_number_1x == 0){
+                                placed_number_1x = random_index;
+                                placed_number_1y = 2;
+                            }
+                            else if(placed_number_2x == 0){
+                                placed_number_2x = random_index;
+                                placed_number_2y = 2;
+                            }
                         }
                     }
                     else if(random_array == 3){
                         if(a3[random_index] == ' '){
                             a3[random_index] = IntToChar(random_number);
                             new_counter += 1;
+                            if(placed_number_1x == 0){
+                                placed_number_1x = random_index;
+                                placed_number_1y = 3;
+                            }
+                            else if(placed_number_2x == 0){
+                                placed_number_2x = random_index;
+                                placed_number_2y = 3;
+                            }
                         }
                     }
 
@@ -170,7 +203,12 @@ namespace HelloWorld
                         Console.BackgroundColor = ConsoleColor.DarkBlue;
                         Console.Write(a1[i]);
                         Console.ResetColor();
-                        Console.CursorVisible = false;
+                        
+                    }
+                    else if((placed_number_1y == 1 && placed_number_1x == i) || (placed_number_2y == 1 && placed_number_2x == i)){
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write(a1[i]);
+                        Console.ResetColor();
                     }
                     else{
                         Console.Write(a1[i]);
@@ -179,13 +217,18 @@ namespace HelloWorld
                     
                 }
                 Console.WriteLine();
+                
 
                 for(int i = 0; i < 32; i++){
                     if(cursor_y == 2 && i == cursor_x){
                         Console.BackgroundColor = ConsoleColor.DarkBlue;
                         Console.Write(a2[i]);
                         Console.ResetColor();
-                        Console.CursorVisible = false;
+                    }
+                    else if((placed_number_1y == 2 && placed_number_1x == i) || (placed_number_2y == 2 && placed_number_2x == i)){
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write(a2[i]);
+                        Console.ResetColor();
                     }
                     else{
                         Console.Write(a2[i]);
@@ -198,7 +241,11 @@ namespace HelloWorld
                         Console.BackgroundColor = ConsoleColor.DarkBlue;
                         Console.Write(a3[i]);
                         Console.ResetColor();
-                        Console.CursorVisible = false;
+                    }
+                    else if((placed_number_1y == 3 && placed_number_1x == i) || (placed_number_2y == 3 && placed_number_2x == i)){
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write(a3[i]);
+                        Console.ResetColor();
                     }
                     else{
                         Console.Write(a3[i]);
@@ -347,7 +394,9 @@ namespace HelloWorld
                     
 
                     //End the loop if the escape key is pressed.
-                    if (cursor_key.Key == ConsoleKey.Escape) break;
+                    if (cursor_key.Key == ConsoleKey.Escape){
+                        break;
+                    }
                 }
 
                 //Check for matching numbers each iteration
